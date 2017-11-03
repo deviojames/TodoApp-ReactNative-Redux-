@@ -1,89 +1,65 @@
-//'use strict';
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput
-} from 'react-native';
+import PropTypes from 'prop-types';
+import { View, TextInput } from 'react-native';
+import { themeable } from '../themes';
 
-export default class AddTodo extends Component {
+import Button from './Button';
+
+class AddTodo extends Component {
   constructor(props) {
-    super(props)
-    this.state = {value: null};
+    super(props);
+    this.state = {
+      text: ''
+    };
+    this.save = this.save.bind(this);
+    this.reset = this.reset.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
   }
-  handleOnChange = (text) => {
-    this.setState({value: text});
+
+  handleTextChange(text) {
+    this.setState({text});
   }
-  addTodo = () => {
-    this.props.addTodo(this.state.value);
-    this.props.hideModal();
-    this.setState({value: null});
+
+  reset() {
+    this.setState({text: ''});
   }
+
+  save() {
+    this.props.saveTodo(this.state.text);
+  }
+
   render() {
-    var {hideModal} = this.props;
+    const { style, placeholderTextColor, textInputStyle } = this.props;
+    const btnDisabled = this.state.text.trim().length === 0;
     return (
-      <View style={styles.container}>
-        <View style={styles.toolbar}>
-        </View>
-        <View style={styles.content}>
-          <TextInput
-            style={styles.input}
-            onChangeText={this.handleOnChange}
-            value={this.state.value} />
-          <TouchableOpacity
-            style={styles.button}
-            onPress={this.addTodo}>
-            <Text style={styles.buttonText}>Add Todo</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={ style }>
+        <TextInput
+          style={ textInputStyle }
+          placeholder={ 'Type a new task here' }
+          placeholderTextColor={ placeholderTextColor }
+          onChangeText={ this.handleTextChange }
+          onSubmitEditing={ this.reset }
+          value={ this.state.text || '' }
+        />
+
+        <Button onPress={this.save} disabled={btnDisabled}>ADD TODO</Button>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    paddingLeft: 10,
-    paddingRight: 10
-  },
-  button: {
-    height: 40,
-    backgroundColor: 'blue',
-    justifyContent: 'center',
-    marginTop: 20
-  },
-  buttonText: {
-      color:'white',
-    textAlign: 'center'
-  },
+const ThemeableAddTodo = themeable(AddTodo, (theme) => {
+  const { styles, variables } = theme;
+  return {
+    placeholderTextColor: variables.colorPlaceHolderText,
+    style: styles.todoEditForm,
+    textInputStyle: styles.addTodoInput
+  };
+});
 
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingLeft: 20,
-    paddingRight: 20
-  },
+ThemeableAddTodo.propTypes = {
+  saveTodo: PropTypes.func,
+  onFinish: PropTypes.func
+};
 
-  toolbar: {
-    paddingTop: 30,
-    paddingBottom: 10,
-    flexDirection: 'row'
-  },
-  toolbarButton: {
-    width: 50
-  },
-  toolbarTitle: {
-    flex: 1,
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold'
-  }
-})
+export default ThemeableAddTodo;
