@@ -7,7 +7,8 @@ class AddTodo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: ''
+      text: '',
+      disabled:true
     };
     this.save = this.save.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
@@ -24,7 +25,6 @@ class AddTodo extends Component {
       this.setState({text: ''});
     }
   }
-
   render() {
     const { style, placeholderTextColor } = this.props;
     return (
