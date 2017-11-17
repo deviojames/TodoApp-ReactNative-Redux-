@@ -14,16 +14,12 @@ import AddTodo from './AddTodoScene'
 class Navigation extends Component {
   constructor(props) {
     super(props);
-    this.save = this.save.bind(this);
   }
   configureScene() {
     return {
       ...Navigator.SceneConfigs.PushFromRight,
       gestures: {}
     };
-  }
-  save(text) {
-    this.props.saveTodo(text);
   }
 
   render() {
@@ -35,18 +31,6 @@ class Navigation extends Component {
     );
   }
 }
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    saveTodo: (title) => {
-      dispatch(addTodo(title));
-    }
-  };
-};
-const NewTodoContainer = connect(
-  () => ({}),
-  mapDispatchToProps
-)(Navigation);
 
 const {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({

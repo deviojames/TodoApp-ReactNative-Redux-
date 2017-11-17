@@ -16,13 +16,6 @@ import NewTodo from './AddTodoScene';
 class TodoListScene extends Component {
   constructor(props) {
     super(props);
-    this.addNewTodo = this.addNewTodo.bind(this);
-  }
-
-  addNewTodo() {
-    this.props.navigator.push({
-      component: NewTodo
-    });
   }
 
   render() {

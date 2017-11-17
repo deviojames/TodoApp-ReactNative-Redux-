@@ -10,6 +10,11 @@ export const addTodo = (title) => {
     title
   };
 };
+export const clearCompleted = (title) => {
+  return {
+    
+  };
+};
 
 export const setVisibilityFilter = (filter) => {
   return {

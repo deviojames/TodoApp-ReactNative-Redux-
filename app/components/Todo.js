@@ -43,14 +43,13 @@ class Todo extends Component {
         </TouchableHighlight>
         <View style={styles.detailsStyle}>
           <Text style={styles.titleStyle}>{title}</Text>
+          <Text style={timestampStyle}>Added at: {createdAt.toGMTString()}</Text>
+          {completedAt && <Text style={timestampStyle}>Completed at: {completedAt.toGMTString()}</Text>}
         </View>
       </View>
     );
   }
 }
-/*
-<Text style={timestampStyle}>Created at: {createdAt.toGMTString()}</Text>
-          {completedAt && <Text style={timestampStyle}>Completed at: {completedAt.toGMTString()}</Text>}*/
 const styles = StyleSheet.create({
   detailsStyle: {
     flex: 1,

@@ -50,11 +50,7 @@ var storage = new Storage({
 	}
 })	
 let defaultTodos = [
-  {id: 1, title: 'Clean up garage', createdAt: new Date(), completed: false},
-  {id: 2, title: 'Install BBQ', createdAt: new Date(), completed: false},
-  {id: 3, title: 'Watch NBA final', createdAt: new Date(), completed: false},
-  {id: 4, title: 'Buy supprise egg', createdAt: new Date(), completed: false},
-  {id: 5, title: 'Watch Iron Man 3', createdAt: new Date(), completed: false},
+  
 ];
 storage.save({
 	key: 'defaultTodostate',  

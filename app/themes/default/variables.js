@@ -13,7 +13,6 @@ const variables = {
   colorWhite: '#ffffff',
   colorDisabled: '#c7c7c7',
   colorPlaceHolderText: '#ddd',
-  mainBgImg: require('./img/time.png'),
 };
 
 export default variables;
